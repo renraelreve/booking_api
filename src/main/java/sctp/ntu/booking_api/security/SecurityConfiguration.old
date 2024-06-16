@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authorize) ->
                         authorize.anyRequest().permitAll());
-        
+
         return http.build();
     }
 
@@ -46,7 +46,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authorize) ->
                         authorize.anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
-        
+
         return http.build();
     }
 
@@ -66,7 +66,7 @@ public class SecurityConfiguration {
         UserDetails user = User.builder()
                             .username("user")
                             .password(passwordEncoder().encode("password"))
-                            .roles("USER")
+                            // .roles("USER")
                             .build();
         return new InMemoryUserDetailsManager(user);
     }

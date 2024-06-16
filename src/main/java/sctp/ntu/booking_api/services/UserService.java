@@ -2,20 +2,20 @@ package sctp.ntu.booking_api.services;
 
 import java.util.ArrayList;
 
-import sctp.ntu.booking_api.entities.Customer;
-import sctp.ntu.booking_api.entities.Interaction;
+import sctp.ntu.booking_api.entities.User;
+// import sctp.ntu.booking_api.entities.Interaction;
 
 public interface UserService {
-    
-    User createUser(User user);
 
-    User getUser(Integer uid);
+  User createUser(User user);
 
-    ArrayList<User> getAllUsers();
+  // User getUser(Long uid);
 
-    User updateUser(Integer uid, User user);
+  ArrayList<User> getAllUsers();
 
-    void deleteUserr(Integer uid);
+  // User updateUser(Long uid, User user);
 
-    ArrayList<User> searchUser(String name);
+  // void deleteUserr(Long uid);
+
+  // ArrayList<User> searchUsers(String name);
 }

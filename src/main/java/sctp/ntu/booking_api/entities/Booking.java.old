@@ -1,0 +1,35 @@
+package sctp.ntu.booking_api.entities;
+
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Table(name = "booking")
+@Getter
+@Setter
+
+public class Booking {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private Long bid;
+
+  @Column(name = "booking_date")
+  private LocalDate bookingDate;
+
+  @Column(name = "booked seats")
+  private int bookedSeats;
+
+}

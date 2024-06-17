@@ -40,11 +40,11 @@ public class UserController {
     // CREATE
     @PostMapping("")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        
+
         // if(bindingResult.hasErrors()) {
         //     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         // }
-        
+
         User newUser = UserService.createUser(customer);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
@@ -67,7 +67,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<User> updateCustomer(@PathVariable Integer id, @RequestBody User user) {
         User updatedUser = userService.updateUser(id, user);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);        
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

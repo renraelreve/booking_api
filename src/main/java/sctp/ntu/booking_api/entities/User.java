@@ -3,6 +3,7 @@ package sctp.ntu.booking_api.entities;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,8 +29,8 @@ public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private Long uid;
+  @Column(name = "uid")
+  private int uid;
 
   @Column(name = "name")
   @NotBlank(message = "Name is mandatory")
@@ -42,11 +43,8 @@ public class User {
   @Column(name = "password")
   private String password;
 
-  // @OneToMany(mappedBy = "booking")
-  // private List<Booking> booking;
-
-  // public User() {
-  // }
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<Booking> bookings;
 
   public User() {
 

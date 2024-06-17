@@ -4,11 +4,13 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -23,13 +25,18 @@ import lombok.Setter;
 public class Booking {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private Long bid;
+  @Column(name = "bid")
+  private int bid;
 
-  @Column(name = "booking_date")
+  @Column(name = "date")
   private LocalDate bookingDate;
 
-  @Column(name = "booked seats")
+  @Column(name = "seats")
   private int bookedSeats;
+
+  @JsonBackReference
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "user_id", referencedColumnName = "uid")
+  private User user;
 
 }

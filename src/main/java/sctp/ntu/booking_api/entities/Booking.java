@@ -33,7 +33,7 @@ public class Booking {
 
   @JsonBackReference(value = "user-booking")
   @ManyToOne(optional = false)
-  @JoinColumn(name = "user_id", referencedColumnName = "uid")
+  @JoinColumn(name = "user_name", referencedColumnName = "name")
   private User user;
 
   @JsonBackReference(value = "showtime-booking")

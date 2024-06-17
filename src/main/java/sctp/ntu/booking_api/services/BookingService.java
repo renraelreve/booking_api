@@ -21,4 +21,5 @@ public interface BookingService {
   // DELETE
   void deleteBooking(int bid);
 
+  Booking addBooking(int uid, int sid, Booking booking);
 }

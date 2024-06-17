@@ -28,12 +28,18 @@ public class BookingController {
     this.bookingService = bookingService;
   }
 
-  @PostMapping("")
-  public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
-    Booking newBooking = bookingService.createBooking(booking);
+  @PostMapping("users/{uid}/showtimes/{sid}")
+  public ResponseEntity<Booking> createBooking(@PathVariable int uid, @PathVariable int sid,
+      @RequestBody Booking booking) {
+    Booking newBooking = bookingService.addBooking(uid, sid, booking);
     return new ResponseEntity<>(newBooking, HttpStatus.CREATED);
-
   }
+
+  // @PostMapping("")
+  // public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
+  // Booking newBooking = bookingService.createBooking(booking);
+  // return new ResponseEntity<>(newBooking, HttpStatus.CREATED);
+  // }
 
   @GetMapping("")
   public ResponseEntity<ArrayList<Booking>> getAllBookings() {

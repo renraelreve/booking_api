@@ -1,7 +1,7 @@
 package sctp.ntu.booking_api.entities;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -13,7 +13,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,38 +24,30 @@ import lombok.Builder;
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "username")
+@Table(name = "showtime")
 
-public class User {
-
+public class Showtime {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "uid")
-  private int uid;
+  @Column(name = "sid")
+  private int sid;
 
-  @Column(name = "name")
-  @NotBlank(message = "Name is mandatory")
-  private String name;
+  @Column(name = "total_seats")
+  private int totalSeats;
 
-  @Email(message = "Email should be valid")
-  @Column(name = "email")
-  private String email;
+  @Column(name = "date")
+  private LocalDate date;
 
-  @Column(name = "password")
-  private String password;
-
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  @JsonManagedReference(value = "user-booking")
+  @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonManagedReference(value = "showtime-booking")
   private List<Booking> bookings;
 
-  public User() {
-
+  public Showtime() {
   }
 
-  public User(String name, String email, String password) {
-    this();
-    this.name = name;
-    this.email = email;
-    this.password = password;
+  public Showtime(int totalSeats, LocalDate date) {
+    this.totalSeats = totalSeats;
+    this.date = date;
   }
+
 }

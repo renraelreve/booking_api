@@ -28,15 +28,17 @@ public class Booking {
   @Column(name = "bid")
   private int bid;
 
-  @Column(name = "date")
-  private LocalDate bookingDate;
-
   @Column(name = "seats")
   private int bookedSeats;
 
-  @JsonBackReference
+  @JsonBackReference(value = "user-booking")
   @ManyToOne(optional = false)
   @JoinColumn(name = "user_id", referencedColumnName = "uid")
   private User user;
+
+  @JsonBackReference(value = "showtime-booking")
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "showtime_id", referencedColumnName = "sid")
+  private Showtime showtime;
 
 }

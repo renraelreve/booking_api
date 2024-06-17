@@ -28,17 +28,20 @@ public class Booking {
   @Column(name = "bid")
   private int bid;
 
-  @Column(name = "seats")
+  @Column(name = "booked-seats")
   private int bookedSeats;
 
   @JsonBackReference(value = "user-booking")
   @ManyToOne(optional = false)
   @JoinColumn(name = "user_name", referencedColumnName = "name")
+  @JoinColumn(name = "user_email", referencedColumnName = "email")
   private User user;
 
   @JsonBackReference(value = "showtime-booking")
   @ManyToOne(optional = false)
   @JoinColumn(name = "showtime_id", referencedColumnName = "sid")
+  @JoinColumn(name = "showtime_date", referencedColumnName = "date")
+  @JoinColumn(name = "showtime_total_seats", referencedColumnName = "total_seats")
   private Showtime showtime;
 
 }

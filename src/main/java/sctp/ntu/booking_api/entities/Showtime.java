@@ -40,7 +40,10 @@ public class Showtime {
   @Column(name = "total_seats")
   private int totalSeats;
 
-  @Transient
+  // @Transient
+  // private int balanceSeats;
+
+  @Column(name = "balance_seats")
   private int balanceSeats;
 
   @Column(name = "date")

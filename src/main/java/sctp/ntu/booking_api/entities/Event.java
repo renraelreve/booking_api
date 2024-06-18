@@ -31,7 +31,7 @@ public class Event {
   @Column(name = "eid")
   private int eid;
 
-  @Column(name = "description")
+  @Column(name = "description", unique = true, nullable = false)
   @NotBlank(message = "description is mandatory")
   private String description;
 

@@ -15,7 +15,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PostLoad;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,6 +40,9 @@ public class Showtime {
   @Column(name = "total_seats")
   private int totalSeats;
 
+  @Transient
+  private int balanceSeats;
+
   @Column(name = "date")
   private LocalDate date;
 
@@ -56,6 +61,16 @@ public class Showtime {
   public Showtime(int totalSeats, LocalDate date) {
     this.totalSeats = totalSeats;
     this.date = date;
+  }
+
+  @PostLoad
+  private void calculateBalanceSeats() {
+    int totalSeats = getTotalSeats();
+    int bookedSeats = 0;
+    for (Booking booking : bookings) {
+      bookedSeats += booking.getBookedSeats();
+    }
+    setBalanceSeats(totalSeats - bookedSeats);
   }
 
 }

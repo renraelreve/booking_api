@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import sctp.ntu.booking_api.entities.Booking;
 import sctp.ntu.booking_api.entities.Showtime;
+import sctp.ntu.booking_api.exceptions.ShowtimeNotFoundException;
+import sctp.ntu.booking_api.repositories.ShowtimeRepository;
 import sctp.ntu.booking_api.services.ShowtimeService;
 
 @RestController
@@ -21,9 +24,11 @@ import sctp.ntu.booking_api.services.ShowtimeService;
 public class ShowtimeController {
 
   private ShowtimeService showtimeService;
+  private ShowtimeRepository showtimeRepository;
 
-  public ShowtimeController(ShowtimeService showtimeService) {
+  public ShowtimeController(ShowtimeService showtimeService, ShowtimeRepository showtimeRepository) {
     this.showtimeService = showtimeService;
+    this.showtimeRepository = showtimeRepository;
   }
 
   @PostMapping("")
@@ -54,6 +59,21 @@ public class ShowtimeController {
   public ResponseEntity<Showtime> deleteShowtime(@PathVariable int sid) {
     showtimeService.deleteShowtime(sid);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @GetMapping("/{sid}/balance-seats")
+  public ResponseEntity<Integer> getBalanceSeats(@PathVariable int sid) {
+    Showtime showtime = showtimeRepository.findById(sid)
+        .orElseThrow(() -> new ShowtimeNotFoundException(sid));
+
+    int totalSeats = showtime.getTotalSeats();
+    int bookedSeats = showtime.getBookings().stream()
+        .mapToInt(Booking::getBookedSeats)
+        .sum();
+
+    int balanceSeats = totalSeats - bookedSeats;
+
+    return ResponseEntity.ok(balanceSeats);
   }
 
 }

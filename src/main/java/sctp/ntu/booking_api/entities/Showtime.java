@@ -66,14 +66,14 @@ public class Showtime {
     this.date = date;
   }
 
-  @PostLoad
-  private void calculateBalanceSeats() {
-    int totalSeats = getTotalSeats();
-    int bookedSeats = 0;
-    for (Booking booking : bookings) {
-      bookedSeats += booking.getBookedSeats();
-    }
-    setBalanceSeats(totalSeats - bookedSeats);
-  }
+  // @PostLoad
+  // private void calculateBalanceSeats() {
+  // int totalSeats = getTotalSeats();
+  // int bookedSeats = 0;
+  // for (Booking booking : bookings) {
+  // bookedSeats += booking.getBookedSeats();
+  // }
+  // setBalanceSeats(totalSeats - bookedSeats);
+  // }
 
 }

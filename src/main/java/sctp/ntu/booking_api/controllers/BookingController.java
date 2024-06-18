@@ -69,11 +69,9 @@ public class BookingController {
 
   @DeleteMapping("/{bid}")
   public ResponseEntity<Booking> deleteBooking(@PathVariable int bid) {
-    try {
-      bookingService.deleteBooking(bid);
-      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    } catch (BookingNotFoundException e) {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+
+    bookingService.deleteBooking(bid);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
   }
 }

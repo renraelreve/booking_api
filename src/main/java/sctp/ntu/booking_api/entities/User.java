@@ -34,7 +34,7 @@ public class User {
   @Column(name = "uid")
   private int uid;
 
-  @Column(name = "name")
+  @Column(name = "name", unique = true, nullable = false)
   @NotBlank(message = "Name is mandatory")
   private String name;
 

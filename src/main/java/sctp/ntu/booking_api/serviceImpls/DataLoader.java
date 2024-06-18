@@ -7,24 +7,29 @@ import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 import sctp.ntu.booking_api.entities.Booking;
+import sctp.ntu.booking_api.entities.Event;
 import sctp.ntu.booking_api.entities.Showtime;
 import sctp.ntu.booking_api.entities.User;
 import sctp.ntu.booking_api.repositories.BookingRepository;
+import sctp.ntu.booking_api.repositories.EventRepository;
 import sctp.ntu.booking_api.repositories.ShowtimeRepository;
 import sctp.ntu.booking_api.repositories.UserRepository;
 
 @Component
 public class DataLoader {
+
   private UserRepository userRepository;
   private BookingRepository bookingRepository;
   private ShowtimeRepository showtimeRepository;
+  private EventRepository eventRepository;
 
   @Autowired
   public DataLoader(UserRepository userRepository, BookingRepository bookingRepository,
-      ShowtimeRepository showtimeRepository) {
+      ShowtimeRepository showtimeRepository, EventRepository eventRepository) {
     this.bookingRepository = bookingRepository;
     this.showtimeRepository = showtimeRepository;
     this.userRepository = userRepository;
+    this.eventRepository = eventRepository;
   }
 
   @PostConstruct
@@ -33,6 +38,7 @@ public class DataLoader {
     userRepository.deleteAll();
     showtimeRepository.deleteAll();
     bookingRepository.deleteAll();
+    eventRepository.deleteAll();
 
     // Load user data
     User tony = new User("Tony", "tony@me.com", "password");
@@ -45,11 +51,22 @@ public class DataLoader {
     userRepository.save(peter);
     userRepository.save(stephen);
 
-    // Load showtime data
+    // Load event data
+    Event event1 = new Event("Music Concert");
+    Event event2 = new Event("Tech Conference");
+
+    eventRepository.save(event1);
+    eventRepository.save(event2);
+
+    // Load showtime data associated with events
     Showtime showtime1 = new Showtime(100, LocalDate.of(2024, 6, 6));
+    showtime1.setEvent(event1);
     Showtime showtime2 = new Showtime(150, LocalDate.of(2024, 7, 7));
+    showtime2.setEvent(event1);
     Showtime showtime3 = new Showtime(200, LocalDate.of(2024, 8, 8));
+    showtime3.setEvent(event2);
     Showtime showtime4 = new Showtime(250, LocalDate.of(2024, 9, 9));
+    showtime4.setEvent(event2);
 
     showtimeRepository.save(showtime1);
     showtimeRepository.save(showtime2);
@@ -81,5 +98,4 @@ public class DataLoader {
     booking4.setShowtime(showtime4);
     bookingRepository.save(booking4);
   }
-
 }

@@ -14,6 +14,7 @@ import sctp.ntu.booking_api.repositories.BookingRepository;
 import sctp.ntu.booking_api.repositories.EventRepository;
 import sctp.ntu.booking_api.repositories.ShowtimeRepository;
 import sctp.ntu.booking_api.repositories.UserRepository;
+import sctp.ntu.booking_api.services.BookingService;
 
 @Component
 public class DataLoader {
@@ -22,14 +23,17 @@ public class DataLoader {
   private BookingRepository bookingRepository;
   private ShowtimeRepository showtimeRepository;
   private EventRepository eventRepository;
+  private BookingService bookingService;
 
   @Autowired
   public DataLoader(UserRepository userRepository, BookingRepository bookingRepository,
-      ShowtimeRepository showtimeRepository, EventRepository eventRepository) {
+      ShowtimeRepository showtimeRepository, EventRepository eventRepository, BookingService bookingService) {
     this.bookingRepository = bookingRepository;
     this.showtimeRepository = showtimeRepository;
     this.userRepository = userRepository;
     this.eventRepository = eventRepository;
+    this.bookingService = bookingService;
+
   }
 
   @PostConstruct
@@ -59,13 +63,13 @@ public class DataLoader {
     eventRepository.save(event2);
 
     // Load showtime data associated with events
-    Showtime showtime1 = new Showtime(100, LocalDate.of(2024, 6, 6));
+    Showtime showtime1 = new Showtime(100, LocalDate.of(2024, 6, 6), 100);
     showtime1.setEvent(event1);
-    Showtime showtime2 = new Showtime(150, LocalDate.of(2024, 7, 7));
+    Showtime showtime2 = new Showtime(150, LocalDate.of(2024, 7, 7), 150);
     showtime2.setEvent(event1);
-    Showtime showtime3 = new Showtime(200, LocalDate.of(2024, 8, 8));
+    Showtime showtime3 = new Showtime(200, LocalDate.of(2024, 8, 8), 200);
     showtime3.setEvent(event2);
-    Showtime showtime4 = new Showtime(250, LocalDate.of(2024, 9, 9));
+    Showtime showtime4 = new Showtime(250, LocalDate.of(2024, 9, 9), 250);
     showtime4.setEvent(event2);
 
     showtimeRepository.save(showtime1);
@@ -73,29 +77,22 @@ public class DataLoader {
     showtimeRepository.save(showtime3);
     showtimeRepository.save(showtime4);
 
-    // Load booking data
+    // Load booking data using bookingService.addBooking to ensure balance seats are
+    // updated
     Booking booking1 = new Booking();
     booking1.setBookedSeats(20);
-    booking1.setUser(tony);
-    booking1.setShowtime(showtime1);
-    bookingRepository.save(booking1);
+    bookingService.addBooking(tony.getId(), showtime1.getId(), booking1);
 
     Booking booking2 = new Booking();
     booking2.setBookedSeats(30);
-    booking2.setUser(tony);
-    booking2.setShowtime(showtime2);
-    bookingRepository.save(booking2);
+    bookingService.addBooking(tony.getId(), showtime2.getId(), booking2);
 
     Booking booking3 = new Booking();
     booking3.setBookedSeats(1);
-    booking3.setUser(peter);
-    booking3.setShowtime(showtime3);
-    bookingRepository.save(booking3);
+    bookingService.addBooking(peter.getId(), showtime3.getId(), booking3);
 
     Booking booking4 = new Booking();
     booking4.setBookedSeats(4);
-    booking4.setUser(stephen);
-    booking4.setShowtime(showtime4);
-    bookingRepository.save(booking4);
+    bookingService.addBooking(stephen.getId(), showtime4.getId(), booking4);
   }
 }

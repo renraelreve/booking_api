@@ -58,6 +58,8 @@ public class EventServiceImpl implements EventService {
     Event selectedEvent = eventRepository.findById(eid).orElseThrow(() -> new EventNotFoundException(eid));
 
     showtime.setEvent(selectedEvent);
+    int totalSeats = showtime.getTotalSeats();
+    showtime.setBalanceSeats(totalSeats);
     return showtimeRepository.save(showtime);
   }
 }

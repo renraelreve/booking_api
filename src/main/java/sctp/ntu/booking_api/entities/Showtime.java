@@ -61,9 +61,14 @@ public class Showtime {
   public Showtime() {
   }
 
-  public Showtime(int totalSeats, LocalDate date) {
+  public Showtime(int totalSeats, LocalDate date, int balance_seats) {
     this.totalSeats = totalSeats;
     this.date = date;
+    this.balanceSeats = balance_seats;
+  }
+
+  public int getId() {
+    return sid;
   }
 
   // @PostLoad

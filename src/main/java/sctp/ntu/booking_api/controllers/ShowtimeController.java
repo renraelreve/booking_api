@@ -34,7 +34,10 @@ public class ShowtimeController {
   @PostMapping("")
   public ResponseEntity<Showtime> createShowtime(@RequestBody Showtime showtime) {
     Showtime newShowtime = showtimeService.createShowtime(showtime);
+    int totalSeats = newShowtime.getTotalSeats();
+    newShowtime.setBalanceSeats(totalSeats);
     return new ResponseEntity<>(newShowtime, HttpStatus.CREATED);
+
   }
 
   @GetMapping("")

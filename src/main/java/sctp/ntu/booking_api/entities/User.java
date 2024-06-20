@@ -59,4 +59,8 @@ public class User {
     this.email = email;
     this.password = password;
   }
+
+  public int getId() {
+    return uid;
+  }
 }

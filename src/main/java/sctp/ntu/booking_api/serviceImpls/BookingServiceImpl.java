@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import sctp.ntu.booking_api.entities.Booking;
 import sctp.ntu.booking_api.entities.Showtime;
 import sctp.ntu.booking_api.entities.User;
@@ -51,16 +52,27 @@ public class BookingServiceImpl implements BookingService {
     Booking bookingToUpdate = bookingRepository.findById(bid).orElseThrow(() -> new BookingNotFoundException(bid));
 
     bookingToUpdate.setBookedSeats(booking.getBookedSeats());
-
+    Showtime showtime = bookingToUpdate.getShowtime();
+    updateBalanceSeats(showtime);
     return bookingRepository.save(bookingToUpdate);
   }
 
   @Override
+  @Transactional
   public void deleteBooking(int bid) {
+    Booking bookingToDelete = bookingRepository.findById(bid).orElseThrow(() -> new BookingNotFoundException(bid));
+
+    // Get the showtime associated with the booking
+    Showtime showtime = bookingToDelete.getShowtime();
+
+    // Remove the booking from the showtime's bookings list
+    showtime.getBookings().remove(bookingToDelete);
     bookingRepository.deleteById(bid);
+    updateBalanceSeats(showtime);
   }
 
   @Override
+  @Transactional
   public Booking addBooking(int uid, int sid, Booking booking) {
     User user = userRepository.findById(uid).orElseThrow(() -> new UserNotFoundException(uid));
     Showtime showtime = showtimeRepository.findById(sid).orElseThrow(() -> new ShowtimeNotFoundException(sid));
@@ -68,6 +80,17 @@ public class BookingServiceImpl implements BookingService {
     booking.setUser(user);
     booking.setShowtime(showtime);
 
-    return bookingRepository.save(booking);
+    Booking savedBooking = bookingRepository.save(booking);
+    updateBalanceSeats(showtime);
+    return savedBooking;
+  }
+
+  // Method to update balanceSeats
+  private void updateBalanceSeats(Showtime showtime) {
+    List<Booking> bookings = showtime.getBookings();
+    int totalSeats = showtime.getTotalSeats();
+    int bookedSeats = bookings.stream().mapToInt(Booking::getBookedSeats).sum();
+    showtime.setBalanceSeats(totalSeats - bookedSeats);
+    showtimeRepository.save(showtime);
   }
 }

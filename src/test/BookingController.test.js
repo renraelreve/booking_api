@@ -52,6 +52,7 @@ describe('BookingController', () => {
       .post('/api/bookings/users/1/showtimes/1')
       .send({ userId: 1, eventId: 1, booking });
 
+      
     // Assert
     expect(response.status).toBe(201);
     expect(response.body).toEqual(booking);

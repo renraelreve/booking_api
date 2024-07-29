@@ -1,0 +1,29 @@
+{
+  "name": "booking_api",
+  "version": "1.0.0",
+  "description": "- The API will allow users to book seats based on the availability - Users can create an account for booking purposes - Users can view different events, as well as details of each event - Users can choose a time and a seat of an event based on the availability - Users can view their bookings and modify as needed",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renraelreve/booking_api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/renraelreve/booking_api/issues"
+  },
+  "homepage": "https://github.com/renraelreve/booking_api#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "jest": "^29.1.2",
+    "supertest": "^6.1.6"
+  }
+}

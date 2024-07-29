@@ -1,6 +1,11 @@
 # This config was automatically generated from your source code
 # Stacks detected: deps:java:.
 version: 2.1
+orbs:
+  node: circleci/node@5.0.1
+  docker: circleci/docker@2.1.4
+  snyk: snyk/snyk@1.5.0
+
 jobs:
   test-java:
     docker:
@@ -22,6 +27,74 @@ jobs:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
           paths:
             - ~/.m2/repository
+
+  # Added Node.js build job
+  build-node:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run: |
+          echo "Installing dependencies..."
+          npm install
+
+  # Added Node.js test job
+  test-node:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run: |
+          echo "Running tests..."
+          npm run test
+
+  # Added Node.js publish job
+  publish-node:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/build:
+          image: muhdrmdhn/education-space
+      - docker/push:
+          image: muhdrmdhn/education-space
+
+  # Added Node.js vulnerability scan job
+  scan-node:
+    docker:
+      - image: cimg/node:16.10
+    environment:
+      IMAGE_NAME: mudrmdhn/education-space
+    steps:
+      - checkout
+      - setup_remote_docker      
+      - docker/check
+      - run: docker build -t $IMAGE_NAME .
+      - snyk/scan: 
+          docker-image-name: $IMAGE_NAME
+          severity-threshold: high
+          fail-on-issues: false
+
+  # Added Node.js code scan job
+  codescan-node:
+    docker:
+      - image: cimg/node:16.10
+    environment:
+      IMAGE_NAME: muhdrmdhn/education-space
+    steps:
+      - checkout
+      - setup_remote_docker
+      - docker/check
+      - run: docker build -t $IMAGE_NAME .
+      - snyk/install
+      - run: |
+          snyk code test
+
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
@@ -31,10 +104,46 @@ jobs:
       - run:
           name: deploy
           command: '#e.g. ./deploy.sh'
+
 workflows:
   build-and-test:
     jobs:
       - test-java
-    # - deploy:
-    #     requires:
-    #       - test-java
+      - build-node # Added build-node job to workflow
+      - test-node: # Added test-node job to workflow
+          requires:
+            - build-node
+
+  main_workflow:
+    jobs:
+      - build-node:
+          filters:
+            branches:
+              only: main
+      - test-node:
+          filters:
+            branches:
+              only: main
+
+  release_workflow:
+    jobs:
+      - build-node:
+          filters:
+            branches:
+              only: release
+      - test-node:
+          filters:
+            branches:
+              only: release
+      - scan-node:
+          filters:
+            branches:
+              only: release
+      - publish-node:
+          filters:
+            branches:
+              only: release
+      - codescan-node:
+          filters:
+            branches:
+              only: release

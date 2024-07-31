@@ -1,7 +1,7 @@
 const request = require('supertest');
 const express = require('express');
-const BookingController = require('../main/js/controller/BookingController'); 
-const BookingService = require('../main/js/services/BookingService');
+const BookingController = require('../main/js/controller/BookingController.js.old'); 
+const BookingService = require('../main/js/services/BookingService.js.old');
 
 jest.mock('../main/js/services/BookingService');
 

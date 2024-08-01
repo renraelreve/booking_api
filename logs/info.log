@@ -32,3 +32,49 @@ Error starting ApplicationContext. To display the condition evaluation report re
 2024-08-02 01:14:53 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-08-02 01:36:15 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-08-02 01:36:15 [restartedMain] INFO  s.n.b.BookingApiApplication - Starting BookingApiApplication using Java 17.0.11 with PID 32505 (/home/ngteckguan/code/sctp-lessons/booking-api/target/classes started by ngteckguan in /home/ngteckguan/code/sctp-lessons/booking-api)
+2024-08-02 01:36:15 [restartedMain] INFO  s.n.b.BookingApiApplication - The following 2 profiles are active: "dev", "withAuth"
+2024-08-02 01:36:16 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-08-02 01:36:16 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-08-02 01:36:16 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-02 01:36:16 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 4 JPA repository interfaces.
+2024-08-02 01:36:17 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-08-02 01:36:17 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-02 01:36:17 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-08-02 01:36:17 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-08-02 01:36:17 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-08-02 01:36:17 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1120 ms
+2024-08-02 01:36:17 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2024-08-02 01:36:17 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-08-02 01:37:18 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2024-08-02 01:37:18 [restartedMain] INFO  s.n.b.BookingApiApplication - Starting BookingApiApplication using Java 17.0.11 with PID 33388 (/home/ngteckguan/code/sctp-lessons/booking-api/target/classes started by ngteckguan in /home/ngteckguan/code/sctp-lessons/booking-api)
+2024-08-02 01:37:18 [restartedMain] INFO  s.n.b.BookingApiApplication - The following 2 profiles are active: "dev", "withAuth"
+2024-08-02 01:37:18 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-08-02 01:37:18 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-08-02 01:37:18 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-02 01:37:18 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 4 JPA repository interfaces.
+2024-08-02 01:37:19 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-08-02 01:37:19 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-02 01:37:19 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-08-02 01:37:19 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-08-02 01:37:19 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-08-02 01:37:19 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1032 ms
+2024-08-02 01:37:19 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-02 01:37:19 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-02 01:37:19 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-08-02 01:37:19 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-02 01:37:20 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-08-02 01:37:23 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@49632891
+2024-08-02 01:37:23 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-08-02 01:37:25 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-02 01:37:28 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-02 01:37:55 [restartedMain] INFO  o.s.s.p.JdbcUserDetailsManager - No authentication manager set. Reauthentication of users when changing passwords will not be performed.
+2024-08-02 01:37:55 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name jdbcUserDetailsService
+2024-08-02 01:37:56 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@42ad2fde, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@56d65f94, org.springframework.security.web.context.SecurityContextHolderFilter@56fba18c, org.springframework.security.web.header.HeaderWriterFilter@5a32933f, org.springframework.web.filter.CorsFilter@10257b3a, org.springframework.security.web.authentication.logout.LogoutFilter@1a3e26d4, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2ed75708, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@75ef1625, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2c6dd384, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@590db1be, org.springframework.security.web.access.ExceptionTranslationFilter@53359826, org.springframework.security.web.access.intercept.AuthorizationFilter@3570bef2]
+2024-08-02 01:37:56 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-08-02 01:37:56 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-08-02 01:37:56 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-08-02 01:37:56 [restartedMain] INFO  s.n.b.BookingApiApplication - Started BookingApiApplication in 38.314 seconds (process running for 38.769)

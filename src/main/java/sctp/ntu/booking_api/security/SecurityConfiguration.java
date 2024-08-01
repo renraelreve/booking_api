@@ -33,6 +33,12 @@ public class SecurityConfiguration {
   @Value("${spring.datasource.url}")
   private String dbURL;
 
+  @Value("${spring.datasource.username}")
+  private String dbUsername;
+
+  @Value("${spring.datasource.password}")
+  private String dbPassword;
+
   // Load environment variables from .env file
   // static {
   // Dotenv dotenv = Dotenv.configure().load();
@@ -124,8 +130,8 @@ public class SecurityConfiguration {
     DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
     dataSourceBuilder.driverClassName("org.postgresql.Driver");
     dataSourceBuilder.url(dbURL);
-    dataSourceBuilder.username("u6snf56msvih79");
-    dataSourceBuilder.password("pf4c7035ec2468ccb349659f47dee6b93be09d62c376aabfc11bead188663dfc5");
+    dataSourceBuilder.username(dbUsername);
+    dataSourceBuilder.password(dbPassword);
     return dataSourceBuilder.build();
   }
 

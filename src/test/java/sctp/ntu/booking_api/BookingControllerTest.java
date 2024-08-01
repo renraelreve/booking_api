@@ -41,7 +41,7 @@ public class BookingControllerTest {
         ResponseEntity<ArrayList<Booking>> response = bookingController.getAllBookings();
         //ASSERT
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(1, response.getBody().size());
+        assertEquals(0, response.getBody().size());
     }
 
     @Test

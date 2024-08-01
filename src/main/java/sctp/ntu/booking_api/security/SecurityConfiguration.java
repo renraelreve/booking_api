@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import javax.sql.DataSource;
 
-import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +29,9 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
+  @Value("${spring.datasource.url}")
+  private String dbUrl;
 
   // Load environment variables from .env file
   // static {
@@ -120,8 +123,7 @@ public class SecurityConfiguration {
     @SuppressWarnings("rawtypes")
     DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
     dataSourceBuilder.driverClassName("org.postgresql.Driver");
-    dataSourceBuilder.url(
-        "jdbc:postgresql://c3gtj1dt5vh48j.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/du5p2phe8u51v?sslmode=require");
+    dataSourceBuilder.url(dbUrl);
     dataSourceBuilder.username("u6snf56msvih79");
     dataSourceBuilder.password("pf4c7035ec2468ccb349659f47dee6b93be09d62c376aabfc11bead188663dfc5");
     return dataSourceBuilder.build();

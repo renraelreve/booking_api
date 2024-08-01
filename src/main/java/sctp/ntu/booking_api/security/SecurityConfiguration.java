@@ -31,7 +31,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 public class SecurityConfiguration {
 
   @Value("${spring.datasource.url}")
-  private String dbUrl;
+  private String dbURL;
 
   // Load environment variables from .env file
   // static {
@@ -123,7 +123,7 @@ public class SecurityConfiguration {
     @SuppressWarnings("rawtypes")
     DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
     dataSourceBuilder.driverClassName("org.postgresql.Driver");
-    dataSourceBuilder.url(dbUrl);
+    dataSourceBuilder.url(dbURL);
     dataSourceBuilder.username("u6snf56msvih79");
     dataSourceBuilder.password("pf4c7035ec2468ccb349659f47dee6b93be09d62c376aabfc11bead188663dfc5");
     return dataSourceBuilder.build();

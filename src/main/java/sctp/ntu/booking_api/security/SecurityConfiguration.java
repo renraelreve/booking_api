@@ -118,10 +118,16 @@ public class SecurityConfiguration {
   // }
 
   @Bean(name = "postgresDataSource")
-  DataSource postgresDataSource() {
+  DataSource postgresDataSource(
+      @Value("${spring.datasource.url}") String springDatasourceUrl, 
+      @Value("${spring.datasource.username}") String springDatasourceUsername,
+      @Value("${spring.datasource.password}") String springDatasourcePassword) {
+    System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX Checking spring.datasource.X @Value XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+    System.out.println("XXXX" + springDatasourceUrl + "XXXX");
     @SuppressWarnings("rawtypes")
     DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
     dataSourceBuilder.driverClassName("org.postgresql.Driver");
+    // secondary database
     // dataSourceBuilder.url(
     //     "jdbc:postgresql://c3gtj1dt5vh48j.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/du5p2phe8u51v?sslmode=require");
     // dataSourceBuilder.username("u6snf56msvih79");
@@ -133,15 +139,6 @@ public class SecurityConfiguration {
   }
 
   // https://howtodoinjava.com/spring-security/inmemory-jdbc-userdetails-service/
-
-  @Value("${spring.datasource.url}")
-  private String springDatasourceUrl;
-
-  @Value("${spring.datasource.username}")
-  private String springDatasourceUsername;
-
-  @Value("${spring.datassource.password}")
-  private String springDatasourcePassword;
 
   @Bean
   // UserDetailsService jdbcUserDetailsService(DataSource h2DataSource) {

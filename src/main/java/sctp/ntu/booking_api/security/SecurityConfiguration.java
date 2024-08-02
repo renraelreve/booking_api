@@ -122,26 +122,26 @@ public class SecurityConfiguration {
     @SuppressWarnings("rawtypes")
     DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
     dataSourceBuilder.driverClassName("org.postgresql.Driver");
-    // dataSourceBuilder.url(
-    //     "jdbc:postgresql://c3gtj1dt5vh48j.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/du5p2phe8u51v?sslmode=require");
-    // dataSourceBuilder.username("u6snf56msvih79");
-    // dataSourceBuilder.password("pf4c7035ec2468ccb349659f47dee6b93be09d62c376aabfc11bead188663dfc5");
-    dataSourceBuilder.url(springDatasourceUrl);
-    dataSourceBuilder.username(springDatasourceUsername);
-    dataSourceBuilder.password(springDatasourcePassword);
+    dataSourceBuilder.url(
+        "jdbc:postgresql://c3gtj1dt5vh48j.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/du5p2phe8u51v?sslmode=require");
+    dataSourceBuilder.username("u6snf56msvih79");
+    dataSourceBuilder.password("pf4c7035ec2468ccb349659f47dee6b93be09d62c376aabfc11bead188663dfc5");
+    // dataSourceBuilder.url(springDatasourceUrl);
+    // dataSourceBuilder.username(springDatasourceUsername);
+    // dataSourceBuilder.password(springDatasourcePassword);
     return dataSourceBuilder.build();
   }
 
   // https://howtodoinjava.com/spring-security/inmemory-jdbc-userdetails-service/
 
-  @Value("${SPRING_DATASOURCE_URL}")
-  private String springDatasourceUrl;
+  // @Value("${SPRING_DATASOURCE_URL}")
+  // private String springDatasourceUrl;
 
-  @Value("${SPRING_DATASOURCE_USERNAME}")
-  private String springDatasourceUsername;
+  // @Value("${SPRING_DATASOURCE_USERNAME}")
+  // private String springDatasourceUsername;
 
-  @Value("${SPRING_DATASOURCE_PASSWORD}")
-  private String springDatasourcePassword;
+  // @Value("${SPRING_DATASOURCE_PASSWORD}")
+  // private String springDatasourcePassword;
 
   @Bean
   // UserDetailsService jdbcUserDetailsService(DataSource h2DataSource) {

@@ -63,7 +63,8 @@ public class SecurityConfiguration {
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests((authorize) -> authorize
             .requestMatchers("/h2").permitAll() // allow access to h2Console
-            .requestMatchers(HttpMethod.POST).permitAll() // allow any user to POST without Authentication
+            .requestMatchers(HttpMethod.GET, "/events").permitAll() // allow any user to GET events without Authentication
+            .requestMatchers(HttpMethod.POST, "/users").permitAll() // allow any user to POST users without Authentication
             // https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-http-requests.html#request-authorization-architecture
             // Matching by HTTP method
             .anyRequest().authenticated())

@@ -1,7 +1,11 @@
 package sctp.ntu.booking_api.entities;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -51,4 +55,17 @@ public class Booking {
   @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.MERGE)
   @JoinColumn(name = "username", referencedColumnName = "uid")
   private User user;
+
+  // https://stackoverflow.com/questions/22615317/serialize-bi-directional-jpa-entities-to-json-with-jackson
+  @JsonProperty
+  private LocalDate getShowtimeDate() {
+    return showtime == null ? null : showtime.getDate();
+  }
+
+  @JsonProperty
+  private String getShowtimeEventDescription() {
+    return showtime == null ? null : showtime.getEvent().getDescription();
+  }
+
+
 }

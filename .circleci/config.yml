@@ -95,3 +95,4 @@ workflows:
               only:
                 - release
                 - imageUrl
+                - account

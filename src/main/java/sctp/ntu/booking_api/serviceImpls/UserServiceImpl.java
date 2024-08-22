@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import sctp.ntu.booking_api.entities.Booking;
 import sctp.ntu.booking_api.entities.User;
 import sctp.ntu.booking_api.exceptions.UserNotFoundException;
 import sctp.ntu.booking_api.repositories.UserRepository;
@@ -39,8 +40,10 @@ public class UserServiceImpl implements UserService {
     return (ArrayList<User>) foundUsers;
   }
 
+  @Override
   public User findOneUser(String name) {
     User foundUser = userRepository.findOneByName(name);
+    System.out.println("findOneUser " + name + " being called");
     return foundUser;
   }
 

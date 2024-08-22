@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import sctp.ntu.booking_api.entities.Booking;
 import sctp.ntu.booking_api.entities.User;
 import sctp.ntu.booking_api.services.UserService;
 
@@ -34,6 +35,13 @@ public class UserController {
     public ResponseEntity<ArrayList<User>> searchUser(@RequestParam String name) {
         ArrayList<User> foundUsers = userService.searchUser(name);
         return new ResponseEntity<>(foundUsers, HttpStatus.OK);
+    }
+
+    @GetMapping("/find")
+    public ResponseEntity<User> findOneUser(@RequestParam String name) {
+        User foundUser = userService.findOneUser(name);
+        System.out.println(foundUser.getName());
+        return new ResponseEntity<>(foundUser, HttpStatus.OK);
     }
 
     // CREATE

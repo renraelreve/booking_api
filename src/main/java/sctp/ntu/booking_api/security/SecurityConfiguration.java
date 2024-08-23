@@ -30,7 +30,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
-@PropertySource(value={"classpath:application.properties"})
+@PropertySource(value = { "classpath:application.properties" })
 public class SecurityConfiguration {
 
   // Load environment variables from .env file
@@ -63,8 +63,10 @@ public class SecurityConfiguration {
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests((authorize) -> authorize
             .requestMatchers("/h2").permitAll() // allow access to h2Console
-            .requestMatchers(HttpMethod.GET, "/events").permitAll() // allow any user to GET events without Authentication
-            .requestMatchers(HttpMethod.POST, "/users").permitAll() // allow any user to POST users without Authentication
+            .requestMatchers(HttpMethod.GET, "/events").permitAll() // allow any user to GET events without
+                                                                    // Authentication
+            .requestMatchers(HttpMethod.POST, "/users").permitAll() // allow any user to POST users without
+                                                                    // Authentication
             // https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-http-requests.html#request-authorization-architecture
             // Matching by HTTP method
             .anyRequest().authenticated())
@@ -73,16 +75,17 @@ public class SecurityConfiguration {
   }
 
   // https://www.baeldung.com/spring-deprecated-websecurityconfigureradapter
-  @Bean
-  AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder passwordEncoder,
-      UserDetailsService userDetailService)
-      throws Exception {
-    return http.getSharedObject(AuthenticationManagerBuilder.class)
-        .userDetailsService(userDetailService)
-        .passwordEncoder(passwordEncoder)
-        .and()
-        .build();
-  }
+  // @Bean
+  // AuthenticationManager authenticationManager(HttpSecurity http,
+  // PasswordEncoder passwordEncoder,
+  // UserDetailsService userDetailService)
+  // throws Exception {
+  // return http.getSharedObject(AuthenticationManagerBuilder.class)
+  // .userDetailsService(userDetailService)
+  // .passwordEncoder(passwordEncoder)
+  // .and()
+  // .build();
+  // }
 
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
@@ -119,46 +122,50 @@ public class SecurityConfiguration {
   // return dataSourceBuilder.build();
   // }
 
-  @Bean(name = "postgresDataSource")
-  DataSource postgresDataSource(
-      @Value("${spring.datasource.url}") String springDatasourceUrl, 
-      @Value("${spring.datasource.username}") String springDatasourceUsername,
-      @Value("${spring.datasource.password}") String springDatasourcePassword) {
+  // @Bean(name = "postgresDataSource")
+  // DataSource postgresDataSource(
+  // @Value("${spring.datasource.url}") String springDatasourceUrl,
+  // @Value("${spring.datasource.username}") String springDatasourceUsername,
+  // @Value("${spring.datasource.password}") String springDatasourcePassword) {
 
-    System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX Checking spring.datasource.X @Value XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-    System.out.println("XXXX" + springDatasourceUrl + "XXXX");
-    System.out.println("XXXX" + springDatasourceUsername + "XXXX");
-    System.out.println("XXXX" + springDatasourcePassword + "XXXX");
+  // System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX Checking
+  // spring.datasource.X @Value XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+  // System.out.println("XXXX" + springDatasourceUrl + "XXXX");
+  // System.out.println("XXXX" + springDatasourceUsername + "XXXX");
+  // System.out.println("XXXX" + springDatasourcePassword + "XXXX");
 
-    @SuppressWarnings("rawtypes")
-    DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-    dataSourceBuilder.driverClassName("org.postgresql.Driver");
-    dataSourceBuilder.url(springDatasourceUrl.replaceAll("'",  ""));
-    dataSourceBuilder.username(springDatasourceUsername);
-    dataSourceBuilder.password(springDatasourcePassword);
-    return dataSourceBuilder.build();
-  }
+  // @SuppressWarnings("rawtypes")
+  // DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+  // dataSourceBuilder.driverClassName("org.postgresql.Driver");
+  // dataSourceBuilder.url(springDatasourceUrl.replaceAll("'", ""));
+  // dataSourceBuilder.username(springDatasourceUsername);
+  // dataSourceBuilder.password(springDatasourcePassword);
+  // return dataSourceBuilder.build();
+  // }
 
   // https://howtodoinjava.com/spring-security/inmemory-jdbc-userdetails-service/
 
-  @Bean
-  // UserDetailsService jdbcUserDetailsService(DataSource h2DataSource) {
-  UserDetailsService jdbcUserDetailsService(DataSource postgresDataSource) {
-    String usersByUsernameQuery = "select name as username, password, true as enabled from user_name where name = ?";
-    String authsByUserQuery = "select name as username, 'user' as authority from user_name where name = ?";
-    // String usersByUsernameQuery = "select username, password, enabled from
-    // tbl_users where username = ?"; // matching standard query from custom SQL
-    // tables
-    // String authsByUserQuery = "select username, authority from tbl_authorities
-    // where username = ?"; // matching standard query from custom SQL tables
+  // @Bean
+  // // UserDetailsService jdbcUserDetailsService(DataSource h2DataSource) {
+  // UserDetailsService jdbcUserDetailsService(DataSource postgresDataSource) {
+  // String usersByUsernameQuery = "select name as username, password, true as
+  // enabled from user_name where name = ?";
+  // String authsByUserQuery = "select name as username, 'user' as authority from
+  // user_name where name = ?";
+  // // String usersByUsernameQuery = "select username, password, enabled from
+  // // tbl_users where username = ?"; // matching standard query from custom SQL
+  // // tables
+  // // String authsByUserQuery = "select username, authority from tbl_authorities
+  // // where username = ?"; // matching standard query from custom SQL tables
 
-    // JdbcUserDetailsManager users = new JdbcUserDetailsManager(h2DataSource);
-    JdbcUserDetailsManager users = new JdbcUserDetailsManager(postgresDataSource);
+  // // JdbcUserDetailsManager users = new JdbcUserDetailsManager(h2DataSource);
+  // JdbcUserDetailsManager users = new
+  // JdbcUserDetailsManager(postgresDataSource);
 
-    users.setUsersByUsernameQuery(usersByUsernameQuery);
-    users.setAuthoritiesByUsernameQuery(authsByUserQuery);
+  // users.setUsersByUsernameQuery(usersByUsernameQuery);
+  // users.setAuthoritiesByUsernameQuery(authsByUserQuery);
 
-    return users;
-  }
+  // return users;
+  // }
 
 }
